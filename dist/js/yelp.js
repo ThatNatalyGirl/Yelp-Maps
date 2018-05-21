@@ -4,8 +4,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 console.log('Top test');
 
-var yelpLatLong = [];
-
 var YelpModule = function () {
 
 	var API_KEY = 'xICUj5FsqM8P6cfNhFQEYwtYzrv75F4WEqj-Hns-fUTZgyLOzQBVyr01f9g3p-5P3J9S7LkrGhLEWjqi7t_ZHoZedrj9zV1E34GIIu1nLLF814cws_futxGtRGPiWnYx';
@@ -14,6 +12,9 @@ var YelpModule = function () {
 	var locationEl = document.getElementById('location');
 	var searchBtn = document.getElementById('search');
 	var resultsEl = document.getElementById('results');
+
+	var yelpLatLong = [];
+	var yelpMarkerNames = [];
 
 	searchBtn.addEventListener('click', function (e) {
 		e.preventDefault();
@@ -51,6 +52,7 @@ var YelpModule = function () {
 	}
 
 	function displayArticle(currentBusiness) {
+		console.log("check this", currentBusiness);
 		var title = currentBusiness.name;
 		// pick any kind of default fallback image
 		var thumbnail = currentBusiness.image_url;
@@ -58,8 +60,8 @@ var YelpModule = function () {
 		var url = currentBusiness.url;
 
 		var liEl = document.createElement('li');
-		var linkEl = document.createElement('a');
 		var imgEl = document.createElement('img');
+		var linkEl = document.createElement('a');
 		//ask about how to define mutliple var at the same time
 		var pAddressEl = document.createElement('p');
 		var p$El = document.createElement('p');
@@ -73,16 +75,21 @@ var YelpModule = function () {
 		p$El.innerHTML = currentBusiness.price;
 		pRatingEl.innerHTML = "Rating " + currentBusiness.rating;
 
+		liEl.appendChild(imgEl);
 		liEl.appendChild(linkEl);
 		linkEl.appendChild(pEl);
-		linkEl.appendChild(imgEl);
 		liEl.appendChild(pAddressEl);
 		liEl.appendChild(p$El);
 		liEl.appendChild(pRatingEl);
 
 		resultsEl.appendChild(liEl);
 
-		yelpLatLong.push(currentBusiness.coordinates);
+		yelpLatLong.push({
+			lat: currentBusiness.coordinates.latitude,
+			lng: currentBusiness.coordinates.longitude
+		});
+
+		yelpMarkerNames.push({});
 	}
 
 	function displayArticles(articleArray) {
@@ -96,6 +103,8 @@ var YelpModule = function () {
 			}
 			// now add the new results	
 			console.log("Here I am");
+			// send it over to google
+			createMarkers(yelpLatLong);
 		}
 	}
 

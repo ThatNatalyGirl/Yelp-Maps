@@ -8,12 +8,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="dist/css/main.css">
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-		<style>
-			#map {
-				height: 400px;
-				width: 50%;
-			}
-		</style>
 	</head>
 	<body>
 		<header>
@@ -44,61 +38,52 @@
 			<a id="search" href="#">Search</a>
 		</form>
 		</section>
-		<section class="sect-2">
-			<ul id="results"></ul>
-		</section>
-		<section class="sect-3">
-			<div id="map"></div>
-		</section>
+		<div class="wrapper">
+			<section class="sect-2">
+				<ul id="results"></ul>
+			</section>
+			<section class="sect-3">
+				<div id="map"></div>
+			</section>
+		</div>
 
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script>
-
-//I need to use .get and .post to grab my array from the yelp.js file and use the data for the map instead of this locationArray here!!!!!!!!!! I need to figure out how to get the stuffs
-			var locationArray = [
-				{lat: -25.363, lng: 131.044},
-				{lat: -26.363, lng: 131.044},
-				{lat: -27.363, lng: 131.044},
-				{lat: -28.363, lng: 131.044},
-				{lat: -29.363, lng: 131.044},
-				{lat: -24.363, lng: 131.044}
-				];
 			
 			console.log("googlesssss");	
 			var map;
 			function initMap() {
-			map = new google.maps.Map(document.getElementById('map'), {
-			  zoom: 2,
-			  center: new google.maps.LatLng(2.8,-187.3),
-			  mapTypeId: 'terrain'
-			});
+				map = new google.maps.Map(document.getElementById('map'), {
+				  zoom: 8,
+				  center: new google.maps.LatLng(33.7490, -84.3880),
+				  mapTypeId: 'terrain'
+				});
 
-
-			// var map;
-			// function initMap() {
-			// 	map = new google.maps.Map(document.getElementById('map'), {
-			// 		center: {lat: -20, lng: 120},
-			// 		zoom: 14
-			// 	});
+				// var map;
+				// function initMap() {
+				// 	map = new google.maps.Map(document.getElementById('map'), {
+				// 		center: {lat: -20, lng: 120},
+				// 		zoom: 14
+				// 	});
 
 				var infoWindow = new google.maps.InfoWindow({
-					content: 'Welcome to Daegu!!!'
+					content: for (var i = 0; i < locationArray.length; i++) {}
 					//make another for loop to run through the array and output coordinates
 				});
 
 				var marker = new google.maps.Marker({
-					position: {lat: -20, lng: 120},
+					position: {lat: 33.7490, lng: -84.3880},
+					zoom: 8,
 					map: map
 				});
 
 				marker.addListener('click', function() {
 					infoWindow.open(map, marker);
 				})
-
-				 createMarkers(locationArray);
 			}	
 
 			function createMarkers(locationArray) {
+				console.log("createMarkers", locationArray)
 				var marker;
 		        for (var i = 0; i < locationArray.length; i++) {
 		          var coords = locationArray[i];
@@ -114,10 +99,7 @@
 		          console.log(marker);
 		        }
 		    }
-
-
-
-		
+	
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYLb9hg543lBQyALzTU-pZnR9U5Um36g&callback=initMap"></script>	
 		<script src="dist/js/main.js"></script>

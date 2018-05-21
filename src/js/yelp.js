@@ -1,6 +1,6 @@
 console.log('Top test')
 
-var yelpLatLong = [];
+
 
 var YelpModule = (function() {
 
@@ -10,6 +10,9 @@ var YelpModule = (function() {
 	const locationEl = document.getElementById('location');
 	const searchBtn = document.getElementById('search');
 	const resultsEl = document.getElementById('results');
+
+	var yelpLatLong = [];
+	var yelpMarkerNames = [];
 
 	searchBtn.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -47,6 +50,7 @@ var YelpModule = (function() {
 	}
 
 	function displayArticle(currentBusiness) {
+		console.log("check this", currentBusiness)
 		const title = currentBusiness.name;
 		// pick any kind of default fallback image
 		let thumbnail = currentBusiness.image_url;
@@ -54,8 +58,8 @@ var YelpModule = (function() {
 		const url = currentBusiness.url;
 
 		const liEl = document.createElement('li');
-		const linkEl = document.createElement('a');
 		const imgEl = document.createElement('img');
+		const linkEl = document.createElement('a');
 		//ask about how to define mutliple var at the same time
 		let pAddressEl = document.createElement('p');
 		let p$El = document.createElement('p');
@@ -69,16 +73,23 @@ var YelpModule = (function() {
 		p$El.innerHTML = currentBusiness.price;
 		pRatingEl.innerHTML = "Rating " + currentBusiness.rating;
 
+		liEl.appendChild(imgEl);
 		liEl.appendChild(linkEl);
 		linkEl.appendChild(pEl);
-		linkEl.appendChild(imgEl);
 		liEl.appendChild(pAddressEl);
 		liEl.appendChild(p$El);
 		liEl.appendChild(pRatingEl);
 
 		resultsEl.appendChild(liEl);
 
-		yelpLatLong.push(currentBusiness.coordinates);
+		yelpLatLong.push({
+			lat: currentBusiness.coordinates.latitude, 
+			lng: currentBusiness.coordinates.longitude
+		});
+
+		yelpMarkerNames.push({
+
+		});
 
 	}
 
@@ -88,14 +99,14 @@ var YelpModule = (function() {
 		if (articleArray.length) {
 			resultsEl.innerHTML = '';
 			for (var i = 0; i <= articleArray.length - 1; i++) {
-			var tempArrayElement = articleArray[i];			
-			displayArticle(tempArrayElement);
+				var tempArrayElement = articleArray[i];			
+				displayArticle(tempArrayElement);
 			}
 			// now add the new results	
-			console.log("Here I am")		
+			console.log("Here I am")
+			// send it over to google
+			createMarkers(yelpLatLong)
 		}	
-
-
 	}
 
 	// we no longer need these as individual parameters:
@@ -162,7 +173,7 @@ var YelpModule = (function() {
 
 
 	return {
-		search: searchYelp,
+		search: searchYelp
 	}
 
 })(); 

@@ -123,14 +123,55 @@ header h1 {
 	color: #fff;
 }
 
-.sect-2 {
-	width: 200px;
-	height: 300px;
+.wrapper {
+	display: flex;
 }
 
-.sect-2 img {
-	width: 100px;
-	height: 100px;
+.wrapper .sect-2 {
+	width: 50%;
+}
+
+.wrapper .sect-2 #results {
+	width: 100%;
+}
+
+.wrapper .sect-2 #results li {
+	width: 90%;
+	margin: 20px 5% 30px 10%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 5% 10px;
+}
+
+.wrapper .sect-2 #results li a {
+	text-decoration: none;
+	color: #b4292e;
+	font-size: 1.5em;
+	transition: .25s;
+}
+
+.wrapper .sect-2 #results li a:hover {
+	color: #fff;
+	text-shadow: 2px 2px 2px #b4292e;
+	transition: .25s;
+}
+
+.wrapper .sect-2 #results li img {
+	width: 250px;
+	height: 200px;
+	border: solid 2px #b4292e;
+}
+
+.wrapper .sect-3 {
+	width: 50%;
+	height: 100%;
+}
+
+.wrapper .sect-3 #map {
+	height: 400px;
+	width: 90%;
 }
 
 /*# sourceMappingURL=main.css.map */
