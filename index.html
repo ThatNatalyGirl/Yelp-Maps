@@ -59,6 +59,7 @@
 				  mapTypeId: 'terrain'
 				});
 
+
 				// var map;
 				// function initMap() {
 				// 	map = new google.maps.Map(document.getElementById('map'), {
@@ -80,6 +81,7 @@
 				marker.addListener('click', function() {
 					infoWindow.open(map, marker);
 				})
+
 			}	
 
 			function createMarkers(locationArray) {
@@ -94,12 +96,14 @@
 		          
 		          marker = new google.maps.Marker({
 		            position: latLng,
+		            zoom: 8,
 		            map: map
 		          });
 		          console.log(marker);
 		        }
 		    }
-	
+
+		
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYLb9hg543lBQyALzTU-pZnR9U5Um36g&callback=initMap"></script>	
 		<script src="dist/js/main.js"></script>

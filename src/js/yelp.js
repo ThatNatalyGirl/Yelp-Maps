@@ -12,7 +12,7 @@ var YelpModule = (function() {
 	const resultsEl = document.getElementById('results');
 
 	var yelpLatLong = [];
-	var yelpMarkerNames = [];
+	// var yelpMarkerNames = [];
 
 	searchBtn.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -87,9 +87,9 @@ var YelpModule = (function() {
 			lng: currentBusiness.coordinates.longitude
 		});
 
-		yelpMarkerNames.push({
+		// yelpMarkerNames.push({
 
-		});
+		// });
 
 	}
 
