@@ -1,91 +1,144 @@
 'use strict';
 
-(function () {
-	var API_KEY = "Tk1_Bj-bjA5Qnwz9mdVs-W7xlNn8nO-1d9V460_k6cEV4LT2pSWB73p3Ui4l2XUX2prRQA14dtU8C7zPOxf0IaZHPd13cxClBg5qmPX_El5TpsCCLnSo_DB0YmPiWnYx";
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+console.log('Top test');
+
+var yelpAddress = [];
+
+var YelpModule = function YelpModule() {
+
+	var API_KEY = 'xICUj5FsqM8P6cfNhFQEYwtYzrv75F4WEqj-Hns-fUTZgyLOzQBVyr01f9g3p-5P3J9S7LkrGhLEWjqi7t_ZHoZedrj9zV1E34GIIu1nLLF814cws_futxGtRGPiWnYx';
 
 	var termEl = document.getElementById('term');
 	var locationEl = document.getElementById('location');
 	var searchBtn = document.getElementById('search');
 	var resultsEl = document.getElementById('results');
 
-	searchBtn.addEventListener("click", function (e) {
+	searchBtn.addEventListener('click', function (e) {
 		e.preventDefault();
-
 		var queryTerm = termEl.value;
 		var location = locationEl.value;
 		var prices = getCheckedValues(document.querySelectorAll('[name=price]:checked'));
-
-		searchYelp(location, queryTerm, prices);
+		console.log('queryTerm', queryTerm);
+		console.log('prices', prices);
+		searchYelp({
+			'location': location,
+			'term': queryTerm,
+			'price': prices
+		});
 	});
 
 	function getCheckedValues(checkedItems) {
-		console.log('checked', checkedItems);
-		//option 1: the old-school JS way
-		var allChecked = '';
-		for (var i = checkedItems.length - 1; i >= 0; i--) {
-			var checkedItem = checkedItems[i];
-			allChecked = allChecked + ', ' + checkedItem;
-		}
-		//option 2: the ES6 way
-		// [...checkedItems].map(function(checkItem){  - this turns it into an array as far as js is concerned
-		//return checkedItem.value });
-		//const allChecked= checkedValues.join(','); 
-		//conole.log('allChecked', allChecked);
+		console.log('checkedItems', checkedItems);
+		// Option 1: the old-school JS way
+		// let allChecked = '';
+		// for (var i = checkedItems.length - 1; i >= 0; i--) {
+		// 	var checkedItem = checkedItems[i].value
+		// 	console.log('checkedItem', checkedItem)
+		// 	allChecked = allChecked + ',' + checkedItem
+		// }
+		// End Option 1;
+		// Option 2: the ES6 way
+		var checkedValues = [].concat(_toConsumableArray(checkedItems)).map(function (checkedItem) {
+			return checkedItem.value;
+		});
+		var allChecked = checkedValues.join(',');
+		// end Option 2
+		console.log('allChecked', allChecked);
+		// 
 		return allChecked;
 	}
 
-	function displayBusinesses(businessArray) {
+	function displayArticle(currentBusiness) {
+		var title = currentBusiness.name;
+		// pick any kind of default fallback image
+		var thumbnail = currentBusiness.image_url;
+		var currentBusinessLocation = currentBusiness.location;
+		var url = currentBusiness.url;
 
-		resultsEl.innerHTML = '';
+		var liEl = document.createElement('li');
+		var linkEl = document.createElement('a');
+		var imgEl = document.createElement('img');
+		//ask about how to define mutliple var at the same time
+		var pAddressEl = document.createElement('p');
+		var p$El = document.createElement('p');
+		var pRatingEl = document.createElement('p');
 
-		console.log(businessArray);
-		// resultsEl.removeChild(liEl);
-		for (var i = 0; i <= businessArray.length - 1; i++) {
-			console.log(businessArray[i]);
+		var pEl = document.createTextNode(title);
+		linkEl.href = url;
+		imgEl.src = thumbnail;
 
-			var currentBusiness = businessArray[i];
-			var currentBusinessLocation = businessArray[i].location;
-			var liEl = document.createElement('li');
-			var aEl = document.createElement('a');
-			var imgEl = document.createElement('img');
-			var pAddressEl = document.createElement('p');
-			var p$El = document.createElement('p');
-			var pRatingEl = document.createElement('p');
+		pAddressEl.innerHTML = currentBusinessLocation.address1 + "<br/>" + currentBusinessLocation.city + ", " + currentBusinessLocation.state + " " + currentBusinessLocation.zip_code;
+		p$El.innerHTML = currentBusiness.price;
+		pRatingEl.innerHTML = "Rating " + currentBusiness.rating;
 
-			aEl.innerHTML = currentBusiness.name;
-			aEl.href = currentBusiness.url;
-			imgEl.src = currentBusiness.image_url;
-			pAddressEl.innerHTML = currentBusinessLocation.address1 + "<br/>" + currentBusinessLocation.city + ", " + currentBusinessLocation.state + " " + currentBusinessLocation.zip_code;
-			p$El.innerHTML = currentBusiness.price;
-			pRatingEl.innerHTML = "Rating " + currentBusiness.rating;
+		liEl.appendChild(linkEl);
+		linkEl.appendChild(pEl);
+		linkEl.appendChild(imgEl);
+		liEl.appendChild(pAddressEl);
+		liEl.appendChild(p$El);
+		liEl.appendChild(pRatingEl);
 
-			liEl.appendChild(aEl);
-			liEl.appendChild(imgEl);
-			liEl.appendChild(pAddressEl);
-			liEl.appendChild(p$El);
-			liEl.appendChild(pRatingEl);
+		resultsEl.appendChild(liEl);
 
-			resultsEl.appendChild(liEl);
+		yelpAddress.push(currentBusinessLocation);
+	}
+
+	function displayArticles(articleArray) {
+		console.log("HeyO");
+		console.log(articleArray.length);
+		if (articleArray.length) {
+			resultsEl.innerHTML = '';
+			for (var i = 0; i <= articleArray.length - 1; i++) {
+				var tempArrayElement = articleArray[i];
+				displayArticle(tempArrayElement);
+			}
+			// now add the new results	
+			console.log("Here I am");
 		}
 	}
 
-	//params and headers are part of axios. It is builing the + "" + "" that we did last week
-	function searchYelp(location, queryTerm, prices) {
-		axios.get("https://circuslabs.net/proxies/yelp-fusion-proxy/", {
-			params: {
-				'_ep': '/businesses/search',
-				'term': queryTerm,
-				'location': location
-			},
+	// we no longer need these as individual parameters:
+	// location, queryTerm, prices, rating, option1, option2
+	/* options is an {}
+ which could look something like:
+ 
+ options = {
+ 	location: location,
+ 	queryTerm: queryTerm,
+ 	prices: prices,
+ 	// etc
+ }
+ */
+	function searchYelp(options) {
+
+		var searchParams = Object.assign({}, options, {
+			'_ep': '/businesses/search'
+		});
+		// then ask Chris about the new ES6 way:
+		// const searchParams = {...options, '_ep': '/businesses/search'}
+
+		console.log('searchParams', searchParams);
+
+		axios.get('https://circuslabs.net/proxies/yelp-fusion-proxy/', {
+			params: searchParams,
 			headers: {
 				'Authorization': 'Bearer ' + API_KEY
 			}
-		})
-		//the response is the JSON data we are getting back
-		.then(function (response) {
+		}).then(function (response) {
 			console.log('here is the get response data for key:', response.data, response);
-			displayBusinesses(response.data.businesses);
+			console.log(response.data.businesses);
+			displayArticles(response.data.businesses);
 		});
+		// .catch(function (error) {
+		// 	console.warn('axios encountered an error!', error);
+		// 	//valueEl.value = 'UNDEFINED'
+		// }); 
 	}
-})();
+
+	return {
+		search: searchYelp
+	};
+};
 //# sourceMappingURL=yelp.js.map

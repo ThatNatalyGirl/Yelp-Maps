@@ -18,10 +18,10 @@
 		<section class="sect-1">
 			<form>
 			<label>Search Yelp:
-				<input type="text" name="term" id="term"/>
+				<input type="text" name="term" id="term" value="coffee"/>
 			</label>	
 			<label>Location: 
-				<input type="text" name="location" id="location"/>
+				<input type="text" name="location" id="location" value="atlanta, ga"/>
 			</label>
 			<div>	
 				<br/>
@@ -40,11 +40,14 @@
 		</form>
 		</section>
 		<section class="sect-2">
-			
+			<ul id="results"></ul>
 		</section>
-
-		
+		<section class="sect-3">
+			<div id="map"></div>
+		</section>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
 		<script src="dist/js/main.js"></script>
+		<script src="dist/js/yelp.js"></script>
 
 	</body>
 </html>

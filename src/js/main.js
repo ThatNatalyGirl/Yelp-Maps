@@ -1,40 +1,68 @@
-console.log(`Hello World`)
+	// 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTJjEQBBDBqRnovl0xGNsgYOJyM_wSjM&callback=GoogleMapModule.initMap"
+	// async defer></script>
+	//	<script src="dist/js/yelp.js"></script>
 
-var GoogleModule = (function(){	
-				
-				var map;
-				function initMap() {
-					var daegu = {lat: 35.8714, lng: 128.6014};
-					map = new google.maps.Map(document.getElementById('map'), {
-						center: daegu,
-						zoom: 14
-					});
 
-					var infoWindow = new google.maps.InfoWindow({
-						content: 'Welcome to Daegu!!!'
-					});
+(function() {
+	// console.log(yelpAddress);
+	console.log("main.js");
 
-					var marker = new google.maps.Marker({
-						position: daegu,
-						map: map
-					});
+	// this is one and done code
+})();
 
-					marker.addListener('click', function() {
-						infoWindow.open(map, marker);
-					})
-				}
+var TestModule = (function() {
+	var myvar = 'hi there';
 
-				function showMarkers(locationArray) {
-					// stuff...
-				}
+	function init() {
+		console.log('init');
+	}
 
-				return {
-					initMap: initMap
-					showMarkers: showMarkers
-				}
-			})();
+	return {
+		init: init,		
+	}
+})();
 
-			var YelpModule = (function() {
-				// pseudo code:
-				//while processing results, pass the business location to GoogleModule.showMarkers(locationArray);
-			})
+var GoogleMapModule = (function() {
+
+	// return {
+	// 	addMarker,
+	// 	init,
+	// }
+}());
+
+
+
+
+
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+// GOOOOOOOOGLE
+
+// <img id="map" src="https://googleapis.com"/maps/api/staticmap?center-....
+
+//  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
