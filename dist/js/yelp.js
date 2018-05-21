@@ -4,9 +4,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 console.log('Top test');
 
-var yelpAddress = [];
+var yelpLatLong = [];
 
-var YelpModule = function YelpModule() {
+var YelpModule = function () {
 
 	var API_KEY = 'xICUj5FsqM8P6cfNhFQEYwtYzrv75F4WEqj-Hns-fUTZgyLOzQBVyr01f9g3p-5P3J9S7LkrGhLEWjqi7t_ZHoZedrj9zV1E34GIIu1nLLF814cws_futxGtRGPiWnYx';
 
@@ -82,7 +82,7 @@ var YelpModule = function YelpModule() {
 
 		resultsEl.appendChild(liEl);
 
-		yelpAddress.push(currentBusinessLocation);
+		yelpLatLong.push(currentBusiness.coordinates);
 	}
 
 	function displayArticles(articleArray) {
@@ -137,8 +137,31 @@ var YelpModule = function YelpModule() {
 		// }); 
 	}
 
+	// function posting() {
+
+	// 	// make a GET request
+	// 	// axios.get("file:///Users/natalyg/Documents/Classes/3rd Quarter/AJAX/YelpMaps/index.html")
+	// 		var key = 'cat'
+	// 	 	//we are changing get to post - this is making the call. Once the call is made we move to '.then'
+	// 	 	axios.post("http://localhost:3000/", yelpLatLong)
+	// 	 	//.then is part of the promise api that js is using to talk to the browser
+	// 	 	//we are passing a function in it with a given parameter
+	// 	 	.then(function(response){
+	// 	 		//we add the .data bc it is a list in the value that you get when you look for response in the console. You can call all the things in that list to get the info listed for you directly in the console. 
+	// 	 		console.log('here is the response data for key', response);
+	// 	 	})
+	// 	 	//this catch is recommended to have (not neccessary). It catches all in case there's an issue. It lets us tell the user to do something Like try again in five seconds or refresh
+	// 	 	.catch(function(error) {
+	// 	 		console.warn('.axios encountered an error!', error)
+	// 	 	});
+
+	// }
+
+	// posting();
+
+
 	return {
 		search: searchYelp
 	};
-};
+}();
 //# sourceMappingURL=yelp.js.map

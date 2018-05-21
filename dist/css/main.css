@@ -123,4 +123,14 @@ header h1 {
 	color: #fff;
 }
 
+.sect-2 {
+	width: 200px;
+	height: 300px;
+}
+
+.sect-2 img {
+	width: 100px;
+	height: 100px;
+}
+
 /*# sourceMappingURL=main.css.map */

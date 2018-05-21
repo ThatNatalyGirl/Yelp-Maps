@@ -24,14 +24,6 @@ var TestModule = function () {
 	};
 }();
 
-var GoogleMapModule = function () {
-
-	// return {
-	// 	addMarker,
-	// 	init,
-	// }
-}();
-
 // GOOOOOOOOGLE
 // GOOOOOOOOGLE
 // GOOOOOOOOGLE
