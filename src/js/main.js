@@ -3,24 +3,24 @@
 	//	<script src="dist/js/yelp.js"></script>
 
 
-(function() {
-	// console.log(yelpAddress);
-	console.log("main.js");
+// (function() {
+// 	// console.log(yelpAddress);
+// 	console.log("main.js");
 
-	// this is one and done code
-})();
+// 	// this is one and done code
+// })();
 
-var TestModule = (function() {
-	var myvar = 'hi there';
+// var TestModule = (function() {
+// 	var myvar = 'hi there';
 
-	function init() {
-		console.log('init');
-	}
+// 	function init() {
+// 		console.log('init');
+// 	}
 
-	return {
-		init: init,		
-	}
-})();
+// 	return {
+// 		init: init,		
+// 	}
+// })();
 
 
 
