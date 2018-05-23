@@ -52,6 +52,7 @@
 			
 			console.log("googlesssss");	
 			var map;
+			var markers = [];
 			function initMap() {
 				map = new google.maps.Map(document.getElementById('map'), {
 				  zoom: 8,
@@ -67,10 +68,10 @@
 				// 		zoom: 14
 				// 	});
 
-				var infoWindow = new google.maps.InfoWindow({
-					// content: for (var i = 0; i < locationArray.length; i++) {}
+				// var infoWindow = new google.maps.InfoWindow({
+				// 	content: for (var i = 0; i < locationArray.length; i++) {}
 					//make another for loop to run through the array and output coordinates
-				});
+				// });
 
 				var marker = new google.maps.Marker({
 					position: {lat: 33.7490, lng: -84.3880},
@@ -78,31 +79,63 @@
 					map: map
 				});
 
-				marker.addListener('click', function() {
-					infoWindow.open(map, marker);
-				})
+			// 	marker.addListener('click', function() {
+			// 		infoWindow.open(map, marker);
+			// 	})
 
-			}	
+			// }	
 
-			function createMarkers(locationArray) {
-				console.log("createMarkers", locationArray)
-				var marker;
-		        for (var i = 0; i < locationArray.length; i++) {
-		          var coords = locationArray[i];
-		          var latLng = new google.maps.LatLng(coords.lat, coords.lng);
-		          console.log(coords);
-		          console.log(coords.lat);
-		          console.log(coords.lng);
+			// function createMarkers(locationArray) {
+			// 	console.log("createMarkers", locationArray)
+			// 	var marker;
+		 //        for (var i = 0; i < locationArray.length; i++) {
+		 //          var coords = locationArray[i];
+		 //          var latLng = new google.maps.LatLng(coords.lat, coords.lng);
+		 //          console.log(coords);
+		 //          console.log(coords.lat);
+		 //          console.log(coords.lng);
 		          
-		          marker = new google.maps.Marker({
-		            position: latLng,
-		            zoom: 8,
-		            map: map
-		          });
-		          console.log(marker);
-		        }
-		    }
-
+		 //          marker = new google.maps.Marker({
+		 //            position: latLng,
+		 //            zoom: 8,
+		 //            map: map
+		 //          });
+		 //          console.log(marker);
+		 //        }
+		 }
+			
+		let deleteMarkers = function () {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+				
+		};
+		 let createMarkers = function(locationArray) {
+			deleteMarkers()
+			bounds = new google.maps.LatLngBounds();
+			
+			locationArray.forEach(function (location) {
+				var position = new google.maps.LatLng(location.lat, location.lng);
+				var marker = new google.maps.Marker({
+					position: position,
+					map: map,
+					animation: google.maps.Animation.DROP,
+				})
+					
+				var infoWindow = new google.maps.InfoWindow({
+					content: location.name + "<br>" + location.phone
+				});
+					marker.addListener('click', function() {
+						infoWindow.open(map, marker);
+					})
+					markers.push(marker)
+									
+				bounds.extend(position);
+			});
+			map.fitBounds(bounds);
+			console.log(markers)
+		}
 		
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYLb9hg543lBQyALzTU-pZnR9U5Um36g&callback=initMap"></script>	
