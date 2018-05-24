@@ -138,8 +138,9 @@
 		}
 		
 		</script>
+		<!-- google is going to start loading the async defer file. It can start loading this instead of waiting for the others and going in order -->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYLb9hg543lBQyALzTU-pZnR9U5Um36g&callback=initMap"></script>	
-<!-- 		<script src="dist/js/main.js"></script>
- -->		<script src="dist/js/yelp.js"></script>
+		<script src="dist/js/google.js"></script>
+		<script src="dist/js/yelp.js"></script>
 	</body>
 </html>

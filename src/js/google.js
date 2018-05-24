@@ -87,5 +87,3 @@ var YelpModule = (function() {
 
 
 
-
-

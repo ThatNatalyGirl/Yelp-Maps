@@ -179,3 +179,11 @@ var YelpModule = (function() {
 })(); 
 
 
+//Iffy function
+var YelpModule = (function() {
+	// pseudo code:
+	//while processing results, pass the business location to GoogleModule.showMarkers(locationArray);
+})();
+
+
+
